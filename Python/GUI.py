@@ -8,7 +8,15 @@ from kivy.app import App
 from kivy.graphics import Mesh
 from functools import partial
 from math import cos, sin, pi
-
+import serial, time
+#--------------------------------------
+# Comunicacion serial
+arduino = serial.Serial('COM4', 9600)
+time.sleep(2)
+rawString = arduino.readline()
+print(rawString)
+arduino.close()
+#---------------------------------------
 
 class MeshTestApp(App):
 
