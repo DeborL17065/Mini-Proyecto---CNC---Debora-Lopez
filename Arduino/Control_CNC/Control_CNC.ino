@@ -11,11 +11,14 @@ int step_z = 2;
 int dir_y = 7;
 int dir_x = 6;
 int dir_z = 5;
-// 
-int x_up = 8;
-int x_down = 9;
-int y_up = 10;
-int y_down = 11;
+//Controles 
+int y_up = 0;
+int y_down = 0;
+int x_up = 0;
+int x_down = 0;
+int z_up = 0;
+int z_down = 0;
+
 int speed_in = A0;
 
 
@@ -31,13 +34,15 @@ float min_speed = 0.6;              //Velocidad en mm por segundo
 
 /////
 float mm_per_step = 0.007142;     //El valor inicial aumenta de 7 vueltas por cm y 200 pasos por rotación completa
-float pos_x = 0;
 float pos_y = 0;
+float pos_x = 0;
+float pos_z = 0;
 float DELAY = 0;
 float RealSpeed = 0;
 unsigned long previousMillis = 0; 
-bool step_x_status = false;
 bool step_y_status = false;
+bool step_x_status = false;
+bool step_z_status = false;
 float max_delay = 0;
 float min_delay = 0;
 
@@ -51,11 +56,14 @@ void setup() {
   pinMode(x_down,INPUT);
   pinMode(y_up,INPUT);
   pinMode(y_down,INPUT);
-  pinMode(speed_in,INPUT);  
+  pinMode(speed_in,INPUT); 
+  ///outputs
+  pinMode(step_y,OUTPUT);  
   pinMode(step_x,OUTPUT);
-  pinMode(step_y,OUTPUT);
+  pinMode(step_z,OUTPUT);
+  pinMode(dir_y,OUTPUT);
   pinMode(dir_x,OUTPUT);
-  pinMode(dir_y,OUTPUT);  
+  pinMode(dir_z,OUTPUT);  
   //Calculate the delay for the speed control
   mm_per_step = (10/turns_per_cm)/steps_per_revolution;
   max_delay = min_speed*20000;
