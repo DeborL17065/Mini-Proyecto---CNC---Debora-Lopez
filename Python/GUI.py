@@ -12,9 +12,11 @@ from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
+from kivy.properties import ObjectProperty
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivy.uix.label import Label
+from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
 from kivy.graphics import Mesh
 from functools import partial
@@ -54,45 +56,143 @@ import serial, time
 ##
 ##""")
 
+class MyLabel(Label):
+    def on_size(self, *args):
+        self.canvas.before.clear()
+        with self.canvas.before:
+            Color(0, 1, 0, 0.25)
+            Rectangle(pos=self.pos, size=self.size)
+
 class Display(FloatLayout):
 
     def __init__(self,**args):
         #Call grid layout constructor
         super().__init__(**args)
         
-        #add a label
-        self.add_widget(Label(text="X: ",
+##        #add a label
+        self.rect = Rectangle(size_hint_y=None,
+                              height=50,
+                              size_hint_x=None,
+                              width=100,
+                              pos_hint={'x':0.15,'y':0.60},
+                              color = (1,0.49,0.31,1))
+        
+        self.add_widget(Label(text="CNC Status",
                               font_size=25,
                               size_hint_y=None,
                               height=50,
                               size_hint_x=None,
                               width=100,
-                              pos_hint={'x':0.1,'y':0.55}))
-        # add input box
+                              pos_hint={'x':0.05,'y':0.90}))
+       
+##        
+##        self.add_widget(Label(text="X: ",
+##                              font_size=20,
+##                              size_hint_y=None,
+##                              height=50,
+##                              size_hint_x=None,
+##                              width=100,
+##                              pos_hint={'x':0.005,'y':0.85}))
+##        # add input box
         self.PX = TextInput(multiline=False,
                             font_size=25,
                             size_hint_y=None,
-                            height=50,
+                            height=25,
                             size_hint_x=None,
-                            width=100,
-                            pos_hint={'x':0.2,'y':0.55})
+                            width=50,
+                            pos_hint={'x':0.08,'y':0.865})
         self.add_widget(self.PX)
+
+#--------------------- BOTONES --------------------------
+#========================= UP ===========================
         
-        self.submit = Button(text = "Submit",
+        self.Y_UP = Button(text = "Y+",
                              font_size=25,
                              size_hint_y=None,
                              height=50,
                              size_hint_x=None,
                              width=100,
-                             pos_hint={'x':0.1,'y':0.85})
-        #self.submit.bind(on_press=self.press)
-        self.add_widget(self.submit )
-    #def press (self,instance):
+                             pos_hint={'x':0.10,'y':0.45},
+                             color = (0,1,0,1),bold= True,
+                             outline_color=(0,0,0,1),
+                             outline_width=2)
+        #self.Y_UP.bind(on_press=self.press_Y_UP)
+        self.add_widget(self.Y_UP)
+    #def press_Y_UP (self,instance):
         
+        self.X_UP = Button(text = "X+",
+                             font_size=25,
+                             size_hint_y=None,
+                             height=50,
+                             size_hint_x=None,
+                             width=100,
+                             pos_hint={'x':0.15,'y':0.35},
+                             background_color = (1,0.49,0.31,1))
+        #self.X_UP.bind(on_press=self.press_X_UP)
+        self.add_widget(self.X_UP)
+    #def press_X_UP (self,instance):
+        
+        self.Z_UP = Button(text = "Z+",
+                     font_size=25,
+                     size_hint_y=None,
+                     height=50,
+                     size_hint_x=None,
+                     width=100,
+                     pos_hint={'x':0.26,'y':0.45},
+                     color = (0,1,0,1),bold= True,
+                     outline_color=(0,0,0,1),
+                     outline_width=2)
+        #self.Z_UP.bind(on_press=self.press_Z_UP)
+        self.add_widget(self.Z_UP)
+    #def press_Z_UP (self,instance):
+
+#========================= DOWN ===========================
+        self.Y_DOWN  = Button(text = "Y-",
+                     font_size=25,
+                     size_hint_y=None,
+                     height=50,
+                     size_hint_x=None,
+                     width=100,
+                     pos_hint={'x':0.10,'y':0.25},
+                     color = (0,1,0,1),bold= True,
+                     outline_color=(0,0,0,1),
+                     outline_width=2)
+        #self.Y_DOWN.bind(on_press=self.press_Y_DOWN)
+        self.add_widget(self.Y_DOWN)
+    #def press_Y_DOWN (self,instance):
+        
+        self.X_DOWN = Button(text = "X-",
+                             font_size=25,
+                             size_hint_y=None,
+                             height=50,
+                             size_hint_x=None,
+                             width=100,
+                             pos_hint={'x':0.05,'y':0.35},
+                             background_color = (1,0.49,0.31,1))
+        #self.X_DOWN.bind(on_press=self.press_X_DOWN)
+        self.add_widget(self.X_DOWN)
+    #def press_X_DOWN (self,instance):
+        
+        self.Z_DOWN = Button(text = "Z-",
+                     font_size=25,
+                     size_hint_y=None,
+                     height=50,
+                     size_hint_x=None,
+                     width=100,
+                     pos_hint={'x':0.26,'y':0.25},
+                     color = (0,1,0,1),bold= True,
+                     outline_color=(0,0,0,1),
+                     outline_width=2)
+        #self.Z_DOWN.bind(on_press=self.press_Z_DOWN)
+        self.add_widget(self.Z_DOWN)
+    #def press_Z_DOWN (self,instance):
+
+#---------------------------------------------------------------
 
 
 class CNC(App):
     def build(self):
+        Window.clearcolor= (0,0,0,1)
         return Display()
 
 
