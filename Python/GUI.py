@@ -114,8 +114,9 @@ class Display(FloatLayout):
                              width=100,
                              pos_hint={'x':0.10,'y':0.45},
                              color = (0,1,0,1),bold= True,
-                             outline_color=(0,0,0,1),
-                             outline_width=2)
+                             outline_color=(0.24,0.36,0.39,0.5),
+                             outline_width=2,
+                             background_color = (0.24,0.36,0.39,0.5))
         #self.Y_UP.bind(on_press=self.press_Y_UP)
         self.add_widget(self.Y_UP)
     #def press_Y_UP (self,instance):
@@ -127,7 +128,7 @@ class Display(FloatLayout):
                              size_hint_x=None,
                              width=100,
                              pos_hint={'x':0.15,'y':0.35},
-                             background_color = (1,0.49,0.31,1))
+                             background_color = (0.24,0.36,0.39,0.5))
         #self.X_UP.bind(on_press=self.press_X_UP)
         self.add_widget(self.X_UP)
     #def press_X_UP (self,instance):
@@ -140,8 +141,9 @@ class Display(FloatLayout):
                      width=100,
                      pos_hint={'x':0.26,'y':0.45},
                      color = (0,1,0,1),bold= True,
-                     outline_color=(0,0,0,1),
-                     outline_width=2)
+                     outline_color=(0.24,0.36,0.39,0.5),
+                     outline_width=2,
+                     background_color = (0.24,0.36,0.39,0.5))
         #self.Z_UP.bind(on_press=self.press_Z_UP)
         self.add_widget(self.Z_UP)
     #def press_Z_UP (self,instance):
@@ -155,8 +157,9 @@ class Display(FloatLayout):
                      width=100,
                      pos_hint={'x':0.10,'y':0.25},
                      color = (0,1,0,1),bold= True,
-                     outline_color=(0,0,0,1),
-                     outline_width=2)
+                     outline_color=(0.24,0.36,0.39,0.5),
+                     outline_width=2,
+                     background_color = (0.24,0.36,0.39,0.5))
         #self.Y_DOWN.bind(on_press=self.press_Y_DOWN)
         self.add_widget(self.Y_DOWN)
     #def press_Y_DOWN (self,instance):
@@ -168,7 +171,7 @@ class Display(FloatLayout):
                              size_hint_x=None,
                              width=100,
                              pos_hint={'x':0.05,'y':0.35},
-                             background_color = (1,0.49,0.31,1))
+                             background_color = (0.24,0.36,0.39,0.5))
         #self.X_DOWN.bind(on_press=self.press_X_DOWN)
         self.add_widget(self.X_DOWN)
     #def press_X_DOWN (self,instance):
@@ -181,8 +184,9 @@ class Display(FloatLayout):
                      width=100,
                      pos_hint={'x':0.26,'y':0.25},
                      color = (0,1,0,1),bold= True,
-                     outline_color=(0,0,0,1),
-                     outline_width=2)
+                     outline_color=(0.24,0.36,0.39,0.5),
+                     outline_width=2,
+                     background_color = (0.24,0.36,0.39,0.5))
         #self.Z_DOWN.bind(on_press=self.press_Z_DOWN)
         self.add_widget(self.Z_DOWN)
     #def press_Z_DOWN (self,instance):
@@ -192,7 +196,7 @@ class Display(FloatLayout):
 
 class CNC(App):
     def build(self):
-        Window.clearcolor= (0,0,0,1)
+        Window.clearcolor= (0.57,0.64,0.75,0.5)
         return Display()
 
 
